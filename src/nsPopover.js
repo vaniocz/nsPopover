@@ -63,7 +63,8 @@
             hideOnButtonClick: toBoolean(attrs.nsPopoverHideOnButtonClick || defaults.hideOnButtonClick),
             mouseRelative: attrs.nsPopoverMouseRelative,
             popupDelay: attrs.nsPopoverPopupDelay || defaults.popupDelay,
-            group: attrs.nsPopoverGroup
+            group: attrs.nsPopoverGroup,
+            onOpen: attrs.nsPopoverOnOpen || defaults.onOpen
           };
 
           if (options.mouseRelative) {
@@ -112,6 +113,10 @@
                 }
 
                 move($popover, placement_, align_, elmRect, $triangle);
+
+                if (options.onOpen) {
+                    scope.$eval(options.onOpen);
+                }
 
                 if (options.hideOnInsideClick) {
                   // Hide the popover without delay on the popover click events.
